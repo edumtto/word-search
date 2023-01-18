@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		342C165229734F7A00E45AF3 /* SearchMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342C165129734F7A00E45AF3 /* SearchMatrix.swift */; };
+		342C8BF3297776AB00802A01 /* WordsToFindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342C8BF2297776AB00802A01 /* WordsToFindView.swift */; };
 		3464E7A2296E1DB800F3BBED /* WordSearchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464E7A1296E1DB800F3BBED /* WordSearchApp.swift */; };
 		3464E7A4296E1DB800F3BBED /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464E7A3296E1DB800F3BBED /* ContentView.swift */; };
 		3464E7A6296E1DB900F3BBED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3464E7A5296E1DB900F3BBED /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		342C165129734F7A00E45AF3 /* SearchMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMatrix.swift; sourceTree = "<group>"; };
+		342C8BF2297776AB00802A01 /* WordsToFindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsToFindView.swift; sourceTree = "<group>"; };
 		3464E79E296E1DB800F3BBED /* WordSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3464E7A1296E1DB800F3BBED /* WordSearchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchApp.swift; sourceTree = "<group>"; };
 		3464E7A3296E1DB800F3BBED /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				34AC3F5C297247FF0021E0B8 /* SearchMatrixView.swift */,
+				342C8BF2297776AB00802A01 /* WordsToFindView.swift */,
 				3464E7CC296E1DFE00F3BBED /* CharacterCell.swift */,
 			);
 			path = View;
@@ -288,6 +291,7 @@
 				34AC3F5D297247FF0021E0B8 /* SearchMatrixView.swift in Sources */,
 				342C165229734F7A00E45AF3 /* SearchMatrix.swift in Sources */,
 				3464E7A4296E1DB800F3BBED /* ContentView.swift in Sources */,
+				342C8BF3297776AB00802A01 /* WordsToFindView.swift in Sources */,
 				3464E7A2296E1DB800F3BBED /* WordSearchApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

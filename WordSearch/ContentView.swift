@@ -2,7 +2,11 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        SearchMatrixView()
+        NavigationStack {
+            SearchMatrixView()
+                .navigationTitle("Search")
+                .navigationBarTitleDisplayMode(.inline)
+        }
     }
 }
 

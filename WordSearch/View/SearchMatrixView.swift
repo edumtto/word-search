@@ -10,10 +10,13 @@ struct SearchMatrixView: View {
                 HStack {
                     ForEach(searchMatrix.model.row(rowIndex), id: \.self) { elem in
                         CharacterCell(character: elem.value)
-                            .frame(width: 38, height: 38)
+                            .frame(width: 32, height: 32)
                     }
                 }
             }
+            Divider()
+            WordsToFindView()
+                .padding(.top)
         }
         .padding()
 

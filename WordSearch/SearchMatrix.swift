@@ -1,20 +1,24 @@
 import Foundation
 
+struct SearchMatrixEntry: Hashable {
+    static let emptyValue: Character = "-"
+    
+    var value: Character
+    var isFound: Bool
+    
+    var isEmpty: Bool {
+        value == SearchMatrixEntry.emptyValue
+    }
+
+    init(_ value: Character = emptyValue) {
+        self.value = value
+        self.isFound = false
+    }
+}
+
 class SearchMatrix {
     struct Size {
         let width, height: Int
-    }
-
-    struct Element: Hashable {
-        static let defaultValue: Character = "."
-        
-        var value: Character
-        var isFound: Bool
-
-        init(_ value: Character = defaultValue) {
-            self.value = value
-            self.isFound = false
-        }
     }
     
     struct WordPosition {
@@ -31,25 +35,25 @@ class SearchMatrix {
     }
 
     let size: Size
-    var data: [[Element]]
+    var data: [[SearchMatrixEntry]]
 
     init(size: Size) {
         self.size = size
-        data = [[Element]](
-            repeating: [Element](
-                repeating: Element(),
+        data = [[SearchMatrixEntry]](
+            repeating: [SearchMatrixEntry](
+                repeating: SearchMatrixEntry(),
                 count: size.width
             ),
             count: size.height
         )
     }
 
-    init(size: Size, data: [[Element]]) {
+    init(size: Size, data: [[SearchMatrixEntry]]) {
         self.size = size
         self.data = data
     }
     
-    func row(_ index: Int) -> [Element] {
+    func row(_ index: Int) -> [SearchMatrixEntry] {
         guard index >= 0, index < size.height else {
             return []
         }
@@ -75,6 +79,23 @@ class SearchMatrix {
         while retries < 10
     }
     
+    private var randomCharacter: Character {
+        let allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        let randomNum = Int(arc4random_uniform(UInt32(allowedChars.count)))
+        let randomIndex = allowedChars.index(allowedChars.startIndex, offsetBy: randomNum)
+        return allowedChars[randomIndex]
+    }
+    
+    func fillEmptyEntriesRandomly() {
+        for i in 0..<size.height {
+            for j in 0..<size.width {
+                if data[i][j].isEmpty {
+                    data[i][j] = SearchMatrixEntry(randomCharacter)
+                }
+            }
+        }
+    }
+        
     private func randomPosition(word: String) -> WordPosition? {
         let wordLength = word.count
         let isHorizontal = (arc4random_uniform(2) == 0)
@@ -106,7 +127,7 @@ class SearchMatrix {
         for i in 0..<word.count {
             let row = position.axis == .horizontal ? position.origin.row : position.origin.row + i
             let col = position.axis == .horizontal ? position.origin.col + i : position.origin.row
-            if data[row][col].value != Element.defaultValue {
+            if !data[row][col].isEmpty {
                 return false
             }
         }
@@ -117,7 +138,7 @@ class SearchMatrix {
         for i in 0..<word.count {
             let row = position.axis == .horizontal ? position.origin.row : position.origin.row + i
             let col = position.axis == .horizontal ? position.origin.col + i : position.origin.row
-            data[row][col] = Element(word[word.index(word.startIndex, offsetBy: i)])
+            data[row][col] = SearchMatrixEntry(word[word.index(word.startIndex, offsetBy: i)])
         }
     }
 }

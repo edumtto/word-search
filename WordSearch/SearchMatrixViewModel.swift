@@ -8,8 +8,9 @@ import Foundation
 
 class SearchMatrixViewModel {
     var model: SearchMatrix = {
-        var model = SearchMatrix(size: .init(width: 8, height: 8))
-        model.include(words: "____", "###", "****", "!!!!!!")
+        var model = SearchMatrix(size: .init(width: 9, height: 12))
+        model.include(words: "oooo", "###", "****", "!!!!!!")
+        model.fillEmptyEntriesRandomly()
         return model
     }()
     
