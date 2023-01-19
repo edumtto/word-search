@@ -12,8 +12,13 @@ struct WordsToFindView: View {
     
     var body: some View {
         VStack {
+            Text("Feelings")
+                .font(.largeTitle)
             ForEach(words, id: \.self) { word in
                 Text(word)
+                    .background(Capsule().stroke()
+                        .padding(.init(top: 0, leading: -4, bottom: 0, trailing: -4))
+                    )
             }
         }
     }
