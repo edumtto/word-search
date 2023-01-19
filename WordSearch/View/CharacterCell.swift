@@ -1,23 +1,24 @@
-//
-//  CharacterCell.swift
-//  WordSearch
-//
-//  Created by Eduardo Motta de Oliveira on 1/10/23.
-//
-
 import SwiftUI
 
 struct CharacterCell: View {
-    var character: Character
+    @EnvironmentObject var entry: SearchMatrix.Entry
     
     var body: some View {
-        Text(String(character))
+        Text(String(entry.value))
             .font(.headline)
+            .background(entry.isSelected ? Color.yellow : Color.clear)
     }
 }
 
 struct CharacterCell_Previews: PreviewProvider {
     static var previews: some View {
-        CharacterCell(character: "A")
+        CharacterCell()
+            .environmentObject(
+                SearchMatrix.Entry(
+                    value: "A",
+                    position: .init(row: 0, col: 0),
+                    isSelected: true
+                )
+            )
     }
 }

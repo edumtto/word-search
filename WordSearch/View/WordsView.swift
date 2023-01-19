@@ -1,23 +1,16 @@
-//
-//  WordsToFindView.swift
-//  WordSearch
-//
-//  Created by Eduardo Motta de Oliveira on 1/17/23.
-//
-
 import SwiftUI
 
-struct WordsToFindView: View {
-    var words: [String] = ["LOVE", "LIFE", "HEART", "FRIENDSHIP"]
+struct WordsView: View {
+    var words: [String]
     
     var body: some View {
-        VStack {
+        VStack(spacing: 4) {
             Text("Feelings")
                 .font(.largeTitle)
             ForEach(words, id: \.self) { word in
                 Text(word)
                     .background(Capsule().stroke()
-                        .padding(.init(top: 0, leading: -4, bottom: 0, trailing: -4))
+                        .padding(.init(top: 1, leading: -4, bottom: 0, trailing: -4))
                     )
             }
         }
@@ -26,6 +19,6 @@ struct WordsToFindView: View {
 
 struct WordsToFindView_Previews: PreviewProvider {
     static var previews: some View {
-        WordsToFindView()
+        WordsView(words: ["LOVE", "LIFE", "HEART", "FRIENDSHIP"])
     }
 }

@@ -1,24 +1,41 @@
 import Foundation
 
-struct SearchMatrixEntry: Hashable {
-    static let emptyValue: Character = "-"
-    
-    var value: Character
-    var isFound: Bool
-    
-    var isEmpty: Bool {
-        value == SearchMatrixEntry.emptyValue
-    }
-
-    init(_ value: Character = emptyValue) {
-        self.value = value
-        self.isFound = false
+extension SearchMatrix {
+    final class Entry: Hashable, ObservableObject {
+        struct Position: Equatable, Hashable {
+            let row, col: UInt
+        }
+        static let emptyValue: Character = "-"
+        
+        var value: Character
+        var isSelected: Bool
+        var isFound: Bool
+        var position: Position
+        
+        var isEmpty: Bool {
+            value == Entry.emptyValue
+        }
+        
+        init(value: Character = Entry.emptyValue, position: Position, isSelected: Bool = false, isFound: Bool = false) {
+            self.value = value
+            self.position = position
+            self.isSelected = isSelected
+            self.isFound = isFound
+        }
+        
+        static func == (lhs: SearchMatrix.Entry, rhs: SearchMatrix.Entry) -> Bool {
+            lhs.position == rhs.position
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(position)
+        }
     }
 }
 
 class SearchMatrix {
     struct Size {
-        let width, height: Int
+        let width, height: UInt
     }
     
     struct WordPosition {
@@ -26,41 +43,54 @@ class SearchMatrix {
             case horizontal, vertical
         }
         
-        struct Origin {
-            let row, col: Int
-        }
-        
-        let origin: Origin
+        let origin: Entry.Position
         let axis: Axis
     }
 
     let size: Size
-    var data: [[SearchMatrixEntry]]
+    @Published var grid: [[Entry]]
 
     init(size: Size) {
         self.size = size
-        data = [[SearchMatrixEntry]](
-            repeating: [SearchMatrixEntry](
-                repeating: SearchMatrixEntry(),
-                count: size.width
-            ),
-            count: size.height
-        )
+        grid = [[Entry]]()
+//            repeating: [Entry(position: .init(row: <#T##UInt#>, col: <#T##UInt#>))](
+//                repeating: SearchMatrixEntry(),
+//                count: size.width
+//            ),
+//            count: size.height
+//        )
+        for row in 0..<size.height {
+            var entryRow: [Entry] = []
+            for col in 0..<size.width {
+                let entry = Entry(value: randomCharacter, position: .init(row: row, col: col))
+                entryRow.append(entry)
+            }
+            grid.append(entryRow)
+        }
     }
 
-    init(size: Size, data: [[SearchMatrixEntry]]) {
+    init(size: Size, grid: [[Entry]]) {
         self.size = size
-        self.data = data
+        self.grid = grid
     }
     
-    func row(_ index: Int) -> [SearchMatrixEntry] {
+    func row(_ index: Int) -> [Entry] {
         guard index >= 0, index < size.height else {
             return []
         }
-        return data[index]
+        return grid[index]
     }
     
-    func include(words: String...) {
+    subscript(row: UInt, col: UInt) -> Entry {
+        get {
+          return grid[Int(row)][Int(col)]
+        }
+        set(entry) {
+            grid[Int(row)][Int(col)] = entry
+        }
+    }
+    
+    func include(words: [String]) {
         words.forEach(include)
     }
     
@@ -87,17 +117,18 @@ class SearchMatrix {
     }
     
     func fillEmptyEntriesRandomly() {
-        for i in 0..<size.height {
-            for j in 0..<size.width {
-                if data[i][j].isEmpty {
-                    data[i][j] = SearchMatrixEntry(randomCharacter)
+        for row in 0..<size.height {
+            for col in 0..<size.width {
+                if self[row, col].isEmpty {
+                    self[row, col] = Entry(value: randomCharacter, position: .init(row: row, col: col))
                 }
             }
         }
     }
         
     private func randomPosition(word: String) -> WordPosition? {
-        let wordLength = word.count
+        let wordLength = UInt(word.count)
+        
         let isHorizontal = (arc4random_uniform(2) == 0)
         if isHorizontal, wordLength <= size.width {
             return WordPosition(
@@ -119,15 +150,16 @@ class SearchMatrix {
         return nil
     }
     
-    private func randomIndex(lessThan limitValue: Int) -> Int {
-        Int(arc4random_uniform(UInt32(limitValue)))
+    private func randomIndex(lessThan limitValue: UInt) -> UInt {
+        UInt(arc4random_uniform(UInt32(limitValue)))
     }
     
     private func isInsertionPossible(_ word: String, position: WordPosition) -> Bool {
-        for i in 0..<word.count {
+        let wordLength = UInt(word.count)
+        for i in 0..<wordLength {
             let row = position.axis == .horizontal ? position.origin.row : position.origin.row + i
             let col = position.axis == .horizontal ? position.origin.col + i : position.origin.row
-            if !data[row][col].isEmpty {
+            if !self[row, col].isEmpty {
                 return false
             }
         }
@@ -135,10 +167,14 @@ class SearchMatrix {
     }
     
     private func insertWord(_ word: String, position: WordPosition) {
-        for i in 0..<word.count {
+        let wordLength = UInt(word.count)
+        for i in 0..<wordLength {
             let row = position.axis == .horizontal ? position.origin.row : position.origin.row + i
             let col = position.axis == .horizontal ? position.origin.col + i : position.origin.row
-            data[row][col] = SearchMatrixEntry(word[word.index(word.startIndex, offsetBy: i)])
+            self[row, col] = Entry(
+                value: word[word.index(word.startIndex, offsetBy: Int(i))],
+                position: .init(row: row, col: col)
+            )
         }
     }
 }
