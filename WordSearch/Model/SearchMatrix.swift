@@ -1,39 +1,6 @@
 import Foundation
 
-extension SearchMatrix {
-    final class Entry: Hashable, ObservableObject {
-        struct Position: Equatable, Hashable {
-            let row, col: UInt
-        }
-        static let emptyValue: Character = "-"
-        
-        var value: Character
-        var isSelected: Bool
-        var isFound: Bool
-        var position: Position
-        
-        var isEmpty: Bool {
-            value == Entry.emptyValue
-        }
-        
-        init(value: Character = Entry.emptyValue, position: Position, isSelected: Bool = false, isFound: Bool = false) {
-            self.value = value
-            self.position = position
-            self.isSelected = isSelected
-            self.isFound = isFound
-        }
-        
-        static func == (lhs: SearchMatrix.Entry, rhs: SearchMatrix.Entry) -> Bool {
-            lhs.position == rhs.position
-        }
-        
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(position)
-        }
-    }
-}
-
-class SearchMatrix {
+final class SearchMatrix {
     struct Size {
         let width, height: UInt
     }
@@ -53,12 +20,7 @@ class SearchMatrix {
     init(size: Size) {
         self.size = size
         grid = [[Entry]]()
-//            repeating: [Entry(position: .init(row: <#T##UInt#>, col: <#T##UInt#>))](
-//                repeating: SearchMatrixEntry(),
-//                count: size.width
-//            ),
-//            count: size.height
-//        )
+        
         for row in 0..<size.height {
             var entryRow: [Entry] = []
             for col in 0..<size.width {
@@ -119,7 +81,7 @@ class SearchMatrix {
     func fillEmptyEntriesRandomly() {
         for row in 0..<size.height {
             for col in 0..<size.width {
-                if self[row, col].isEmpty {
+                if !self[row, col].isPartOfAWord {
                     self[row, col] = Entry(value: randomCharacter, position: .init(row: row, col: col))
                 }
             }
@@ -159,7 +121,7 @@ class SearchMatrix {
         for i in 0..<wordLength {
             let row = position.axis == .horizontal ? position.origin.row : position.origin.row + i
             let col = position.axis == .horizontal ? position.origin.col + i : position.origin.row
-            if !self[row, col].isEmpty {
+            if self[row, col].isPartOfAWord {
                 return false
             }
         }
@@ -173,7 +135,8 @@ class SearchMatrix {
             let col = position.axis == .horizontal ? position.origin.col + i : position.origin.row
             self[row, col] = Entry(
                 value: word[word.index(word.startIndex, offsetBy: Int(i))],
-                position: .init(row: row, col: col)
+                position: .init(row: row, col: col),
+                isPartOfAWord: true
             )
         }
     }

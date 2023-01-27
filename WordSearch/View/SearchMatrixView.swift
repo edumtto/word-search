@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SearchMatrixView: View {
-    @StateObject private var viewModel = SearchMatrixViewModel()
+    @ObservedObject private var viewModel = SearchMatrixViewModel()
     //    @State private var offset = CGSize.zero
     
     var body: some View {
@@ -18,8 +18,7 @@ struct SearchMatrixView: View {
                             .environmentObject(entry)
                             .frame(width: 32, height: 32)
                             .onTapGesture {
-                                entry.isSelected = true
-                                print("selected \(entry.value): \(entry.isSelected)")
+                                viewModel.selectEntry(row: row, col: column)
                             }
                     }
                 }

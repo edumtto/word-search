@@ -6,7 +6,9 @@ struct CharacterCell: View {
     var body: some View {
         Text(String(entry.value))
             .font(.headline)
+            .frame(width: 32, height: 32)
             .background(entry.isSelected ? Color.yellow : Color.clear)
+            .foregroundColor(entry.isFound ? .gray : .black)
     }
 }
 
@@ -17,7 +19,8 @@ struct CharacterCell_Previews: PreviewProvider {
                 SearchMatrix.Entry(
                     value: "A",
                     position: .init(row: 0, col: 0),
-                    isSelected: true
+                    isSelected: true,
+                    isFound: true
                 )
             )
     }
