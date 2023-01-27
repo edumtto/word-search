@@ -20,7 +20,7 @@ import Foundation
     func selectEntry(row: UInt, col: UInt) {
         let entry = matrix[row, col]
         
-        if entry.isSelected {
+        if entry.isFound {
             return
         }
         

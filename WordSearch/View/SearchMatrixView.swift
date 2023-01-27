@@ -2,7 +2,6 @@ import SwiftUI
 
 struct SearchMatrixView: View {
     @ObservedObject private var viewModel = SearchMatrixViewModel()
-    //    @State private var offset = CGSize.zero
     
     var body: some View {
         VStack {
@@ -23,22 +22,7 @@ struct SearchMatrixView: View {
                     }
                 }
             }
-            //            .gesture(
-            //                DragGesture()
-            //                    .onChanged { gesture in
-            //                        offset = gesture.translation
-            //                    }
-            //                    .onEnded { _ in
-            ////                        if abs(offset.width) > 100 {
-            ////                            // remove the card
-            ////                        } else {
-            ////                            offset = .zero
-            ////                        }
-            //                    }
-            //            )
         }
-        //        .padding()
-        
     }
 }
 

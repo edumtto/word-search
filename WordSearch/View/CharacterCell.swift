@@ -8,7 +8,9 @@ struct CharacterCell: View {
             .font(.headline)
             .frame(width: 32, height: 32)
             .background(entry.isSelected ? Color.yellow : Color.clear)
-            .foregroundColor(entry.isFound ? .gray : .black)
+            .foregroundColor(entry.isFound ? .red : .black)
+            .animation(.linear(duration: 0.2), value: entry.isSelected)
+            .animation(.linear, value: entry.isFound)
     }
 }
 
@@ -19,7 +21,7 @@ struct CharacterCell_Previews: PreviewProvider {
                 SearchMatrix.Entry(
                     value: "A",
                     position: .init(row: 0, col: 0),
-                    isSelected: true,
+                    isSelected: false,
                     isFound: true
                 )
             )
