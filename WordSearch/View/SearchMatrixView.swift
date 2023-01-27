@@ -1,11 +1,16 @@
 import SwiftUI
 
 struct SearchMatrixView: View {
-    @ObservedObject private var viewModel = SearchMatrixViewModel()
+    @ObservedObject private var viewModel = SearchMatrixViewModel(
+        matrixSize: .init(width: 9, height: 12),
+        words: [SearchWord("LOVE"), SearchWord("LIFE"), SearchWord("HEART"), SearchWord("FRIENDSHIP"), SearchWord("PEACE"), SearchWord("HAPPY"), SearchWord("ROMANCE"), SearchWord("THANKS"), SearchWord("SMILE")]
+    )
     
     var body: some View {
         VStack {
-            WordsView(words: viewModel.words)
+            SearchWordsView(words: viewModel.words)
+                .padding(.leading, 16)
+                .padding(.trailing, 16)
             Divider()
                 .padding(.top)
                 .padding(.bottom)

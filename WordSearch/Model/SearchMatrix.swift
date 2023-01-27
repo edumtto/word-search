@@ -45,15 +45,11 @@ final class SearchMatrix {
     
     subscript(row: UInt, col: UInt) -> Entry {
         get {
-          return grid[Int(row)][Int(col)]
+            return grid[Int(row)][Int(col)]
         }
         set(entry) {
             grid[Int(row)][Int(col)] = entry
         }
-    }
-    
-    func include(words: [String]) {
-        words.forEach(include)
     }
     
     func include(word: String) {

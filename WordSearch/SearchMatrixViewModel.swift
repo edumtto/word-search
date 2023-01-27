@@ -4,18 +4,20 @@ import Foundation
     enum SelectionAxis {
         case horizontal, vertical
     }
-    static let staticWords: [String] = ["LOVE", "LIFE", "HEART", "FRIENDSHIP"]
+    
     private var selection: [SearchMatrix.Entry] = []
     private var selectionAxis: SelectionAxis?
     
-    @Published var matrix: SearchMatrix = {
-        var model = SearchMatrix(size: .init(width: 9, height: 12))
-        model.include(words: staticWords)
-        //model.fillEmptyEntriesRandomly()
-        return model
-    }()
+    @Published var matrix: SearchMatrix
+    @Published var words: [SearchWord]
     
-    @Published var words: [String] = staticWords
+    init(matrixSize: SearchMatrix.Size, words: [SearchWord]) {
+        self.matrix = SearchMatrix(size: matrixSize)
+        self.words = words
+        words.forEach {
+            matrix.include(word: $0.value)
+        }
+    }
     
     func selectEntry(row: UInt, col: UInt) {
         let entry = matrix[row, col]
@@ -85,19 +87,22 @@ import Foundation
             .joined(separator: "")
         
         let reversedSelectedWord = String(selectedWord.reversed())
-        SearchMatrixViewModel.staticWords.forEach { word in
-            if word == selectedWord || word == reversedSelectedWord {
-                setWordFound(word)
+        words.forEach { word in
+            if !word.isFound,
+                word.value == selectedWord || word.value == reversedSelectedWord {
+                    setWordFound(word)
             }
         }
     }
     
-    private func setWordFound(_ word: String) {
+    private func setWordFound(_ word: SearchWord) {
+        word.isFound = true
+        
         selection.forEach {
             $0.isFound = true
             $0.isSelected = false
         }
         
-        print("Yay! \(word) found!")
+        print("Yay! \(word.value) found!")
     }
 }
