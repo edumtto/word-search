@@ -12,4 +12,3 @@ struct GameScore: Hashable {
     let time: Time
     let words: Words
 }
-

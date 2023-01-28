@@ -16,7 +16,7 @@ import Combine
     @Published private(set) var timeCounter: Int
     @Published var presentScore: Bool = false
     
-    init(matrixSize: SearchMatrix.Size, words: [SearchWord], timeLimit: Int = 10) {
+    init(matrixSize: SearchMatrix.Size, words: [SearchWord], timeLimit: Int = 60) {
         self.matrix = SearchMatrix(size: matrixSize)
         self.words = words
         self.timeCounter = timeLimit

@@ -4,7 +4,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             SearchMatrixView()
-//                .navigationTitle("Search")
+                .navigationTitle("Level 1")
                 .navigationBarTitleDisplayMode(.inline)
         }
     }
