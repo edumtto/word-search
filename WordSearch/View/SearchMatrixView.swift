@@ -18,6 +18,7 @@ struct SearchMatrixView: View {
             SearchWordsView(words: viewModel.words)
                 .padding(.leading, 16)
                 .padding(.trailing, 16)
+            TimeCounterView(timeCounter: viewModel.timeCounter)
             Divider()
                 .padding(.top)
                 .padding(.bottom)

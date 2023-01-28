@@ -18,8 +18,9 @@ struct FinalScore: View {
             Text("Congratulations!")
                 .font(.title)
                 .padding(16)
-            Text("You found \(score.wordsFound) words in \(score.timeSpent) seconds!")
+            Text("You found \(score.words.found) words from \(score.words.total)\nin \(score.time.spent) seconds!")
                 .font(.title2)
+                .multilineTextAlignment(.center)
         }
         .padding(16)
     }
@@ -27,6 +28,6 @@ struct FinalScore: View {
 
 struct FinalScore_Previews: PreviewProvider {
     static var previews: some View {
-        FinalScore(score: GameScore(wordsFound: 5, timeSpent: "0"))
+        FinalScore(score: GameScore(time: .init(total: 60, spent: 32), words: .init(total: 10, found: 4)))
     }
 }

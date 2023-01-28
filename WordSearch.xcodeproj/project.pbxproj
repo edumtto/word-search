@@ -24,6 +24,7 @@
 		34B4E082298468F8001F793D /* WordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B4E081298468F8001F793D /* WordView.swift */; };
 		34B4E084298499EB001F793D /* GameScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B4E083298499EB001F793D /* GameScore.swift */; };
 		34B4E08729849B35001F793D /* FinalScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B4E08629849B35001F793D /* FinalScore.swift */; };
+		34D9D5BD2985DBCA00A5A84E /* TimeCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D9D5BC2985DBCA00A5A84E /* TimeCounterView.swift */; };
 		34E27AB7298363960012188B /* SearchMatrixEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E27AB6298363960012188B /* SearchMatrixEntry.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		34B4E081298468F8001F793D /* WordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordView.swift; sourceTree = "<group>"; };
 		34B4E083298499EB001F793D /* GameScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScore.swift; sourceTree = "<group>"; };
 		34B4E08629849B35001F793D /* FinalScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalScore.swift; sourceTree = "<group>"; };
+		34D9D5BC2985DBCA00A5A84E /* TimeCounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCounterView.swift; sourceTree = "<group>"; };
 		34E27AB6298363960012188B /* SearchMatrixEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMatrixEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,6 +176,7 @@
 				3464E7CC296E1DFE00F3BBED /* CharacterCell.swift */,
 				342C8BF2297776AB00802A01 /* SearchWordsView.swift */,
 				34B4E081298468F8001F793D /* WordView.swift */,
+				34D9D5BC2985DBCA00A5A84E /* TimeCounterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 			files = (
 				3464E7CF296E1F0A00F3BBED /* SearchMatrixViewModel.swift in Sources */,
 				3464E7CD296E1DFE00F3BBED /* CharacterCell.swift in Sources */,
+				34D9D5BD2985DBCA00A5A84E /* TimeCounterView.swift in Sources */,
 				34AC3F5F297251E70021E0B8 /* Matrix.swift in Sources */,
 				34E27AB7298363960012188B /* SearchMatrixEntry.swift in Sources */,
 				34AC3F5D297247FF0021E0B8 /* SearchMatrixView.swift in Sources */,

@@ -8,25 +8,28 @@ import Combine
     
     private var selection: [SearchMatrix.Entry] = []
     private var selectionAxis: SelectionAxis?
-    private lazy var timer = Timer
-        .publish(every: 1, on: .main, in: .common)
-        .autoconnect()
-        .sink {
-            print("timer fired: \($0)")
-        }
+    private var timer = Timer()
     
     @Published private(set) var matrix: SearchMatrix
     @Published private(set) var words: [SearchWord]
-    @Published private(set) var gameScore = GameScore(wordsFound: 0, timeSpent: "0 seconds")
-    @Published private(set) var timeCounter: Int = 0
+    @Published private(set) var gameScore: GameScore
+    @Published private(set) var timeCounter: Int
     @Published var presentScore: Bool = false
     
-    init(matrixSize: SearchMatrix.Size, words: [SearchWord]) {
+    init(matrixSize: SearchMatrix.Size, words: [SearchWord], timeLimit: Int = 10) {
         self.matrix = SearchMatrix(size: matrixSize)
         self.words = words
+        self.timeCounter = timeLimit
+        self.gameScore = GameScore(
+            time: .init(total: timeLimit, spent: 0),
+            words: .init(total: words.count, found: 0)
+        )
+        
         words.forEach {
             matrix.include(word: $0.value)
         }
+        
+        runTimer()
     }
     
     func selectEntry(row: UInt, col: UInt) {
@@ -48,11 +51,8 @@ import Combine
             if let foundWord = checkIfWordFound(on: selection) {
                 setWordFound(foundWord)
                 if isWordSetFound() {
-                    presentScore = true
-                    gameScore = GameScore(
-                        wordsFound: words.count,
-                        timeSpent: "\(timeCounter)"
-                    )
+                    stopTimer()
+                    setGameOver()
                 }
             }
             print("selected \(entry.value): \(entry.isSelected)")
@@ -60,6 +60,38 @@ import Combine
         }
         
         clearSelection()
+    }
+    
+    private func setGameOver() {
+        let totalTime = gameScore.time.total
+        let timeSpent = totalTime - timeCounter
+        gameScore = GameScore(
+            time: .init(total: totalTime, spent: timeSpent),
+            words: .init(total: gameScore.words.total, found: words.filter(\.isFound).count)
+        )
+        presentScore = true
+    }
+    
+    private func runTimer() {
+         timer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(updateTimer),
+            userInfo: nil,
+            repeats: true
+         )
+    }
+    
+    private func stopTimer() {
+        timer.invalidate()
+    }
+    
+    @objc private func updateTimer() {
+        timeCounter -= 1
+        if timeCounter <= 0 {
+            stopTimer()
+            setGameOver()
+        }
     }
     
     private func isAdjacentSelection(entry: SearchMatrix.Entry) -> Bool {
