@@ -16,6 +16,7 @@ final class SearchMatrix {
 
     let size: Size
     @Published var grid: [[Entry]]
+    var wordInsertionRetries: Int = 10
 
     init(size: Size) {
         self.size = size
@@ -52,19 +53,20 @@ final class SearchMatrix {
         }
     }
     
-    func include(word: String) {
-        var retries = 0
-        
-        repeat {
-            guard let randomPosition = randomPosition(word: word) else { return } // Throws exception
+    @discardableResult func include(word: String) -> Bool {
+        for retryCount in 0...wordInsertionRetries {
+            guard let randomPosition = randomPosition(word: word) else {
+                return false
+            }
+            
             if isInsertionPossible(word, position: randomPosition) {
                 insertWord(word, position: randomPosition)
-                debugPrint("\"\(word)\" inserted (retries: \(retries))")
-                return
+                 debugPrint("\"\(word)\" inserted with \(retryCount) retries")
+                return true
             }
-            retries += 1
         }
-        while retries < 10
+                
+        return false
     }
     
     private var randomCharacter: Character {

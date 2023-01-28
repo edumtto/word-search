@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 @MainActor class SearchMatrixViewModel: ObservableObject {
     enum SelectionAxis {
@@ -8,8 +9,11 @@ import Foundation
     private var selection: [SearchMatrix.Entry] = []
     private var selectionAxis: SelectionAxis?
     
-    @Published var matrix: SearchMatrix
-    @Published var words: [SearchWord]
+    @Published private(set) var matrix: SearchMatrix
+    @Published private(set) var words: [SearchWord]
+    @Published private(set) var isGameFinished: Bool = false
+    @Published private(set) var gameScore = GameScore(wordsFound: 0, timeSpent: "0 seconds")
+//    @Published private(set) var timeCounter: Int = 0
     
     init(matrixSize: SearchMatrix.Size, words: [SearchWord]) {
         self.matrix = SearchMatrix(size: matrixSize)
@@ -35,7 +39,16 @@ import Foundation
         if isAdjacentSelection(entry: entry) {
             entry.isSelected = !entry.isSelected
             selection.append(entry)
-            checkIfWordFound()
+            if let foundWord = checkIfWordFound(on: selection) {
+                setWordFound(foundWord)
+                if isWordSetFound() {
+                    isGameFinished = true
+                    gameScore = GameScore(
+                        wordsFound: words.count,
+                        timeSpent: "\(timeCounter)"
+                    )
+                }
+            }
             print("selected \(entry.value): \(entry.isSelected)")
             return
         }
@@ -81,18 +94,16 @@ import Foundation
         selectionAxis = nil
     }
     
-    private func checkIfWordFound() {
+    private func checkIfWordFound(on selection: [SearchMatrix.Entry]) -> SearchWord? {
         let selectedWord: String = selection
             .map { String($0.value) }
             .joined(separator: "")
         
         let reversedSelectedWord = String(selectedWord.reversed())
-        words.forEach { word in
-            if !word.isFound,
-                word.value == selectedWord || word.value == reversedSelectedWord {
-                    setWordFound(word)
-            }
+        let wordsFound = words.filter { word in
+            !word.isFound && word.value == selectedWord || word.value == reversedSelectedWord
         }
+        return wordsFound.first
     }
     
     private func setWordFound(_ word: SearchWord) {
@@ -104,5 +115,9 @@ import Foundation
         }
         
         print("Yay! \(word.value) found!")
+    }
+    
+    private func isWordSetFound() -> Bool {
+        words.filter({ $0.isFound == false }).isEmpty
     }
 }
