@@ -5,8 +5,10 @@ struct WordView: View {
     
     var body: some View {
         Text(word.value)
-            .background(Capsule().stroke()
-                .padding(.init(top: 1, leading: -4, bottom: 0, trailing: -4))
+            .background(
+                Capsule()
+                    .stroke()
+                    .padding(.init(top: 1, leading: -4, bottom: 0, trailing: -4))
             )
             .strikethrough(word.isFound)
     }

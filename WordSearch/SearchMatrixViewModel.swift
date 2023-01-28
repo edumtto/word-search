@@ -8,12 +8,18 @@ import Combine
     
     private var selection: [SearchMatrix.Entry] = []
     private var selectionAxis: SelectionAxis?
+    private lazy var timer = Timer
+        .publish(every: 1, on: .main, in: .common)
+        .autoconnect()
+        .sink {
+            print("timer fired: \($0)")
+        }
     
     @Published private(set) var matrix: SearchMatrix
     @Published private(set) var words: [SearchWord]
-    @Published private(set) var isGameFinished: Bool = false
     @Published private(set) var gameScore = GameScore(wordsFound: 0, timeSpent: "0 seconds")
-//    @Published private(set) var timeCounter: Int = 0
+    @Published private(set) var timeCounter: Int = 0
+    @Published var presentScore: Bool = false
     
     init(matrixSize: SearchMatrix.Size, words: [SearchWord]) {
         self.matrix = SearchMatrix(size: matrixSize)
@@ -42,7 +48,7 @@ import Combine
             if let foundWord = checkIfWordFound(on: selection) {
                 setWordFound(foundWord)
                 if isWordSetFound() {
-                    isGameFinished = true
+                    presentScore = true
                     gameScore = GameScore(
                         wordsFound: words.count,
                         timeSpent: "\(timeCounter)"
