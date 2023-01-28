@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct SearchMatrixView: View {
-    @ObservedObject private var viewModel = SearchMatrixViewModel(
+struct GameLevelView: View {
+    @ObservedObject private var viewModel = GameLevelViewModel(
         matrixSize: .init(width: 9, height: 12),
         words: [SearchWord("LOVE"), SearchWord("LIFE"), SearchWord("HEART"), SearchWord("FRIENDSHIP"), SearchWord("PEACE"), SearchWord("HAPPY"), SearchWord("ROMANCE"), SearchWord("THANKS"), SearchWord("SMILE")]
     )
@@ -15,7 +15,7 @@ struct SearchMatrixView: View {
     
     private var wordsView: some View {
         VStack {
-            SearchWordsView(words: viewModel.words)
+            SearchedWordsView(words: viewModel.words)
                 .padding(.leading, 16)
                 .padding(.trailing, 16)
             TimeCounterView(timeTotal: viewModel.gameScore.time.total, timeCounter: viewModel.timeCounter)
@@ -26,7 +26,7 @@ struct SearchMatrixView: View {
                 HStack {
                     ForEach(0..<viewModel.matrix.size.width, id: \.self) { column in
                         let entry = viewModel.matrix[row, column]
-                        CharacterCell()
+                        MatrixItemView()
                             .environmentObject(entry)
                             .frame(width: 32, height: 32)
                             .onTapGesture {
@@ -41,6 +41,6 @@ struct SearchMatrixView: View {
 
 struct SearchMatrixView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchMatrixView()
+        GameLevelView()
     }
 }

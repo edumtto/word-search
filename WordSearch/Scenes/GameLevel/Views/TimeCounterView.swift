@@ -10,13 +10,8 @@ struct TimeCounterView: View {
     
     var body: some View {
         HStack {
-            
-            //            Image(systemName: "timer")
             Text("\(timeCounter)")
-                .overlay(
-                    progressCircle
-                )
-            
+                .overlay(progressCircle)
         }
     }
     

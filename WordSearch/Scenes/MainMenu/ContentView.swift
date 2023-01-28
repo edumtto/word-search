@@ -3,7 +3,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationStack {
-            SearchMatrixView()
+            GameLevelView()
                 .navigationTitle("Level 1")
                 .navigationBarTitleDisplayMode(.inline)
         }

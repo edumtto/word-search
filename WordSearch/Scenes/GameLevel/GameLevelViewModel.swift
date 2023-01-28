@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-@MainActor class SearchMatrixViewModel: ObservableObject {
+@MainActor class GameLevelViewModel: ObservableObject {
     enum SelectionAxis {
         case horizontal, vertical
     }
@@ -55,7 +55,6 @@ import Combine
                     setGameOver()
                 }
             }
-            print("selected \(entry.value): \(entry.isSelected)")
             return
         }
         
@@ -151,8 +150,6 @@ import Combine
             $0.isFound = true
             $0.isSelected = false
         }
-        
-        print("Yay! \(word.value) found!")
     }
     
     private func isWordSetFound() -> Bool {

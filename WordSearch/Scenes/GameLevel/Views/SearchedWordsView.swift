@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SearchWordsView: View {
+struct SearchedWordsView: View {
     var words: [SearchWord]
     
     var body: some View {
@@ -50,6 +50,6 @@ struct SearchWordsView: View {
 
 struct SearchWordsView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchWordsView(words: [SearchWord("LOVE"), SearchWord("LIFE", isFound: true), SearchWord("HEART"), SearchWord("FRIENDSHIP"), SearchWord("PEACE"), SearchWord("HAPPY"), SearchWord("ROMANCE"), SearchWord("THANKS"), SearchWord("SMILE")])
+        SearchedWordsView(words: [SearchWord("LOVE"), SearchWord("LIFE", isFound: true), SearchWord("HEART"), SearchWord("FRIENDSHIP"), SearchWord("PEACE"), SearchWord("HAPPY"), SearchWord("ROMANCE"), SearchWord("THANKS"), SearchWord("SMILE")])
     }
 }

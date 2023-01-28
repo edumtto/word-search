@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CharacterCell: View {
+struct MatrixItemView: View {
     @EnvironmentObject var entry: SearchMatrix.Entry
     
     var body: some View {
@@ -16,7 +16,7 @@ struct CharacterCell: View {
 
 struct CharacterCell_Previews: PreviewProvider {
     static var previews: some View {
-        CharacterCell()
+        MatrixItemView()
             .environmentObject(
                 SearchMatrix.Entry(
                     value: "A",
