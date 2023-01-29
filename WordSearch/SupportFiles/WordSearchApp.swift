@@ -4,7 +4,7 @@ import SwiftUI
 struct WordSearchApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainMenuView()
         }
     }
 }

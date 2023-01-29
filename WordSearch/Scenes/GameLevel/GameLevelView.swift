@@ -3,14 +3,20 @@ import SwiftUI
 struct GameLevelView: View {
     @ObservedObject private var viewModel = GameLevelViewModel(
         matrixSize: .init(width: 9, height: 12),
-        words: [SearchWord("LOVE"), SearchWord("LIFE"), SearchWord("HEART"), SearchWord("FRIENDSHIP"), SearchWord("PEACE"), SearchWord("HAPPY"), SearchWord("ROMANCE"), SearchWord("THANKS"), SearchWord("SMILE")]
+        words: [SearchWord("LOVE"), SearchWord("LIFE"), SearchWord("HEART"), SearchWord("FRIENDSHIP"), SearchWord("PEACE"), SearchWord("HAPPY"), SearchWord("ROMANCE"), SearchWord("THANKS"), SearchWord("SMILE")],
+        timeLimit: 5
     )
+    
+    let level: Int
     
     var body: some View {
             wordsView
             .navigationDestination(isPresented: $viewModel.presentScore) {
                 FinalScore(score: viewModel.gameScore)
             }
+            .navigationTitle("Level \(level)")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
     }
     
     private var wordsView: some View {
@@ -41,6 +47,6 @@ struct GameLevelView: View {
 
 struct SearchMatrixView_Previews: PreviewProvider {
     static var previews: some View {
-        GameLevelView()
+        GameLevelView(level: 2)
     }
 }

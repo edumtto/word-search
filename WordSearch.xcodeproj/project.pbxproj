@@ -10,7 +10,7 @@
 		342C165229734F7A00E45AF3 /* SearchMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342C165129734F7A00E45AF3 /* SearchMatrix.swift */; };
 		342C8BF3297776AB00802A01 /* SearchedWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342C8BF2297776AB00802A01 /* SearchedWordsView.swift */; };
 		3464E7A2296E1DB800F3BBED /* WordSearchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464E7A1296E1DB800F3BBED /* WordSearchApp.swift */; };
-		3464E7A4296E1DB800F3BBED /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464E7A3296E1DB800F3BBED /* ContentView.swift */; };
+		3464E7A4296E1DB800F3BBED /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464E7A3296E1DB800F3BBED /* MainMenuView.swift */; };
 		3464E7A6296E1DB900F3BBED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3464E7A5296E1DB900F3BBED /* Assets.xcassets */; };
 		3464E7AA296E1DB900F3BBED /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3464E7A9296E1DB900F3BBED /* Preview Assets.xcassets */; };
 		3464E7B4296E1DB900F3BBED /* WordSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464E7B3296E1DB900F3BBED /* WordSearchTests.swift */; };
@@ -18,11 +18,12 @@
 		3464E7C0296E1DB900F3BBED /* WordSearchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464E7BF296E1DB900F3BBED /* WordSearchUITestsLaunchTests.swift */; };
 		3464E7CD296E1DFE00F3BBED /* MatrixItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464E7CC296E1DFE00F3BBED /* MatrixItemView.swift */; };
 		3464E7CF296E1F0A00F3BBED /* GameLevelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464E7CE296E1F0A00F3BBED /* GameLevelViewModel.swift */; };
-		34AC3F5D297247FF0021E0B8 /* SearchMatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AC3F5C297247FF0021E0B8 /* SearchMatrixView.swift */; };
+		34AC3F5D297247FF0021E0B8 /* GameLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AC3F5C297247FF0021E0B8 /* GameLevelView.swift */; };
 		34B4E08029846066001F793D /* SearchWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B4E07F29846066001F793D /* SearchWord.swift */; };
 		34B4E082298468F8001F793D /* WordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B4E081298468F8001F793D /* WordView.swift */; };
 		34B4E084298499EB001F793D /* GameScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B4E083298499EB001F793D /* GameScore.swift */; };
 		34B4E08729849B35001F793D /* FinalScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B4E08629849B35001F793D /* FinalScore.swift */; };
+		34D3C5EC2986FCBE00CFDAAA /* MainMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D3C5EB2986FCBE00CFDAAA /* MainMenuCoordinator.swift */; };
 		34D9D5BD2985DBCA00A5A84E /* TimeCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D9D5BC2985DBCA00A5A84E /* TimeCounterView.swift */; };
 		34E27AB7298363960012188B /* SearchMatrixEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E27AB6298363960012188B /* SearchMatrixEntry.swift */; };
 /* End PBXBuildFile section */
@@ -49,7 +50,7 @@
 		342C8BF2297776AB00802A01 /* SearchedWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedWordsView.swift; sourceTree = "<group>"; };
 		3464E79E296E1DB800F3BBED /* WordSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3464E7A1296E1DB800F3BBED /* WordSearchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchApp.swift; sourceTree = "<group>"; };
-		3464E7A3296E1DB800F3BBED /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3464E7A3296E1DB800F3BBED /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		3464E7A5296E1DB900F3BBED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3464E7A7296E1DB900F3BBED /* WordSearch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WordSearch.entitlements; sourceTree = "<group>"; };
 		3464E7A9296E1DB900F3BBED /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -60,11 +61,12 @@
 		3464E7BF296E1DB900F3BBED /* WordSearchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		3464E7CC296E1DFE00F3BBED /* MatrixItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixItemView.swift; sourceTree = "<group>"; };
 		3464E7CE296E1F0A00F3BBED /* GameLevelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLevelViewModel.swift; sourceTree = "<group>"; };
-		34AC3F5C297247FF0021E0B8 /* SearchMatrixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMatrixView.swift; sourceTree = "<group>"; };
+		34AC3F5C297247FF0021E0B8 /* GameLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLevelView.swift; sourceTree = "<group>"; };
 		34B4E07F29846066001F793D /* SearchWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWord.swift; sourceTree = "<group>"; };
 		34B4E081298468F8001F793D /* WordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordView.swift; sourceTree = "<group>"; };
 		34B4E083298499EB001F793D /* GameScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScore.swift; sourceTree = "<group>"; };
 		34B4E08629849B35001F793D /* FinalScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalScore.swift; sourceTree = "<group>"; };
+		34D3C5EB2986FCBE00CFDAAA /* MainMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCoordinator.swift; sourceTree = "<group>"; };
 		34D9D5BC2985DBCA00A5A84E /* TimeCounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCounterView.swift; sourceTree = "<group>"; };
 		34E27AB6298363960012188B /* SearchMatrixEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMatrixEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,16 +161,15 @@
 			path = WordSearchUITests;
 			sourceTree = "<group>";
 		};
-		34AC3F5B297247CE0021E0B8 /* Views */ = {
+		34AC3F5B297247CE0021E0B8 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
 				342C8BF2297776AB00802A01 /* SearchedWordsView.swift */,
 				34B4E081298468F8001F793D /* WordView.swift */,
 				34D9D5BC2985DBCA00A5A84E /* TimeCounterView.swift */,
-				34AC3F5C297247FF0021E0B8 /* SearchMatrixView.swift */,
 				3464E7CC296E1DFE00F3BBED /* MatrixItemView.swift */,
 			);
-			path = Views;
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		34B4E08529849B1D001F793D /* FinalScore */ = {
@@ -182,8 +183,9 @@
 		34D9D5BE2985E83C00A5A84E /* GameLevel */ = {
 			isa = PBXGroup;
 			children = (
+				34AC3F5C297247FF0021E0B8 /* GameLevelView.swift */,
 				3464E7CE296E1F0A00F3BBED /* GameLevelViewModel.swift */,
-				34AC3F5B297247CE0021E0B8 /* Views */,
+				34AC3F5B297247CE0021E0B8 /* Subviews */,
 				341B396B2978CE6000DC351D /* Models */,
 			);
 			path = GameLevel;
@@ -202,7 +204,8 @@
 		34D9D5C02985E9E100A5A84E /* MainMenu */ = {
 			isa = PBXGroup;
 			children = (
-				3464E7A3296E1DB800F3BBED /* ContentView.swift */,
+				3464E7A3296E1DB800F3BBED /* MainMenuView.swift */,
+				34D3C5EB2986FCBE00CFDAAA /* MainMenuCoordinator.swift */,
 			);
 			path = MainMenu;
 			sourceTree = "<group>";
@@ -350,11 +353,12 @@
 			files = (
 				3464E7CF296E1F0A00F3BBED /* GameLevelViewModel.swift in Sources */,
 				3464E7CD296E1DFE00F3BBED /* MatrixItemView.swift in Sources */,
+				34D3C5EC2986FCBE00CFDAAA /* MainMenuCoordinator.swift in Sources */,
 				34D9D5BD2985DBCA00A5A84E /* TimeCounterView.swift in Sources */,
 				34E27AB7298363960012188B /* SearchMatrixEntry.swift in Sources */,
-				34AC3F5D297247FF0021E0B8 /* SearchMatrixView.swift in Sources */,
+				34AC3F5D297247FF0021E0B8 /* GameLevelView.swift in Sources */,
 				342C165229734F7A00E45AF3 /* SearchMatrix.swift in Sources */,
-				3464E7A4296E1DB800F3BBED /* ContentView.swift in Sources */,
+				3464E7A4296E1DB800F3BBED /* MainMenuView.swift in Sources */,
 				342C8BF3297776AB00802A01 /* SearchedWordsView.swift in Sources */,
 				34B4E08729849B35001F793D /* FinalScore.swift in Sources */,
 				34B4E084298499EB001F793D /* GameScore.swift in Sources */,

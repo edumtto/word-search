@@ -54,14 +54,14 @@ final class SearchMatrix {
     }
     
     @discardableResult func include(word: String) -> Bool {
-        for retryCount in 0...wordInsertionRetries {
+        for _ in 0...wordInsertionRetries {
             guard let randomPosition = randomPosition(word: word) else {
                 return false
             }
             
             if isInsertionPossible(word, position: randomPosition) {
                 insertWord(word, position: randomPosition)
-                 debugPrint("\"\(word)\" inserted with \(retryCount) retries")
+                 // debugPrint("\"\(word)\" inserted with \(retryCount) retries")
                 return true
             }
         }
