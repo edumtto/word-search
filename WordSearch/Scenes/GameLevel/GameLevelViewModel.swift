@@ -8,27 +8,35 @@ import Combine
     
     private var selection: [SearchMatrix.Entry] = []
     private var selectionAxis: SelectionAxis?
-    private var timer = Timer()
+    private var timer: Timer?
+    private var pathState: PathState
     
     @Published private(set) var matrix: SearchMatrix
     @Published private(set) var words: [SearchWord]
     @Published private(set) var gameScore: GameScore
-    @Published private(set) var timeCounter: Int
-    @Published var presentScore: Bool = false
+    @Published private(set) var timeCounter: UInt
     
-    init(matrixSize: SearchMatrix.Size, words: [SearchWord], timeLimit: Int = 60) {
-        self.matrix = SearchMatrix(size: matrixSize)
-        self.words = words
-        self.timeCounter = timeLimit
-        self.gameScore = GameScore(
-            time: .init(total: timeLimit, spent: 0),
-            words: .init(total: words.count, found: 0)
+    let title: String
+    
+    init(_ level: AppConfiguration.Level, pathState: PathState) {
+        title = level.title
+        self.pathState = pathState
+        let matrixSize: SearchMatrix.Size = .init(
+            width: level.matrixSize.width,
+            height: level.matrixSize.height
+        )
+        matrix = SearchMatrix(size: matrixSize)
+        words = level.words.map { SearchWord($0.uppercased()) }
+        timeCounter = level.timeLimit
+        gameScore = GameScore(
+            time: .init(total: level.timeLimit, spent: 0),
+            words: .init(total: UInt(level.words.count), found: 0)
         )
         
         words.forEach {
             matrix.include(word: $0.value)
         }
-        
+        print(">>> GameLevelViewModel init")
         runTimer()
     }
     
@@ -64,15 +72,17 @@ import Combine
     private func setGameOver() {
         let totalTime = gameScore.time.total
         let timeSpent = totalTime - timeCounter
-        gameScore = GameScore(
-            time: .init(total: totalTime, spent: timeSpent),
-            words: .init(total: gameScore.words.total, found: words.filter(\.isFound).count)
+        pathState.path.append(
+            GameScore(
+                time: .init(total: totalTime, spent: timeSpent),
+                words: .init(total: gameScore.words.total, found: UInt(words.filter(\.isFound).count))
+            )
         )
-        presentScore = true
     }
     
     private func runTimer() {
-         timer = Timer.scheduledTimer(
+        guard timer == nil else { return }
+        timer = Timer.scheduledTimer(
             timeInterval: 1,
             target: self,
             selector: #selector(updateTimer),
@@ -82,7 +92,8 @@ import Combine
     }
     
     private func stopTimer() {
-        timer.invalidate()
+        timer?.invalidate()
+        timer = nil
     }
     
     @objc private func updateTimer() {

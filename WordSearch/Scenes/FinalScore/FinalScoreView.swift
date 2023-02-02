@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct FinalScore: View {
+    @EnvironmentObject var pathState: PathState
     var score: GameScore
     
     var isGameWon: Bool {
@@ -21,8 +22,9 @@ struct FinalScore: View {
                 Text("You found \(score.words.found) words from \(score.words.total)\nin \(score.time.spent) seconds!")
                     .font(.title2)
                     .multilineTextAlignment(.center)
-                NavigationLink("Back to main menu") {
-                    MainMenuView()
+                Button("Back to main menu") {
+                    //MainMenuView()
+                    pathState.path.removeLast(pathState.path.count)
                 }
                 .buttonStyle(.bordered)
                 .foregroundColor(.black)

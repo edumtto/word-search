@@ -1,10 +1,11 @@
 import SwiftUI
 
 struct MainMenuView: View {
-    @State private var path = NavigationPath()
+    @ObservedObject private var pathState = PathState()
+    private let configuration: AppConfiguration
     
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $pathState.path) {
             ZStack {
                 Image("background").resizable(resizingMode: .tile).opacity(0.5)
                     .ignoresSafeArea()
@@ -15,9 +16,7 @@ struct MainMenuView: View {
                             .weight(.black)
                         )
                         .padding(24)
-                    NavigationLink("Start game") {
-                        GameLevelView(level: 1)
-                    }
+                    NavigationLink("Start game", value: configuration.levels[0])
                     .buttonStyle(.borderedProminent)
                     .tint(.yellow)
                     .foregroundColor(.black)
@@ -25,14 +24,34 @@ struct MainMenuView: View {
                     .fontWeight(.bold)
                     .padding(24)
                 }
-
+                .navigationDestination(for: AppConfiguration.Level.self) { level in
+                    GameLevelView(viewModel: GameLevelViewModel(level, pathState: pathState))
+                }
             }
         }
+        .environmentObject(pathState)
+    }
+    
+    init(configuration: AppConfiguration) {
+        self.configuration = configuration
+        print(">>> MainMenuView init")
     }
 }
 
 struct MainMenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MainMenuView()
+        MainMenuView(configuration: AppConfiguration(levels: []))
+    }
+}
+
+final class PathState: ObservableObject {
+    @Published var path: NavigationPath {
+        didSet {
+            print(">>> path count: \(path.count)")
+        }
+    }
+    
+    init(path: NavigationPath = NavigationPath()) {
+        self.path = path
     }
 }

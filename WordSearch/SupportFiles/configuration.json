@@ -1,0 +1,34 @@
+{
+    "levels": [
+        {
+            "title": "Level 1",
+            "category": "Feelings",
+            "words": ["happy", "angry", "sad", "fear", "joy", "surprise"],
+            "time_limit": 60,
+            "matrix_size": {
+                "width": 9,
+                "height": 12
+            }
+        },
+        {
+            "title": "Level 2",
+            "category": "Foods",
+            "words": ["hamburger", "tomato", "pasta", "salad", "apple", "meat"],
+            "time_limit": 40,
+            "matrix_size": {
+                "width": 9,
+                "height": 12
+            }
+        },
+        {
+            "title": "Level 3 (final)",
+            "category": "Flowers",
+            "words": ["dahlia", "orchid", "rose", "poppy", "azalea", "daisy"],
+            "time_limit": 30,
+            "matrix_size": {
+                "width": 9,
+                "height": 12
+            }
+        }
+    ]
+}
