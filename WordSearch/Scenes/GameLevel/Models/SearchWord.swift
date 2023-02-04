@@ -1,6 +1,6 @@
 import Foundation
 
-final class SearchWord: ObservableObject, Hashable {
+final class SearchWord: ObservableObject, Hashable, Identifiable {
     let value: String
     @Published var isFound: Bool
     

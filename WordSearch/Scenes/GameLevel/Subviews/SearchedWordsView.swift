@@ -7,10 +7,11 @@ struct SearchedWordsView: View {
         VStack(spacing: 4) {
             ScrollView(.horizontal) {
                 HStack(spacing: 14) {
-                    ForEach(words, id: \.self) { word in
+                    ForEach(words) { word in
                         WordView()
                             .environmentObject(word)
                     }
+                    .animation(.easeIn, value: 0.3)
                 }.padding(16)
             }
         }
