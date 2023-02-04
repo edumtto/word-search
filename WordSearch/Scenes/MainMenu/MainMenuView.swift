@@ -40,7 +40,9 @@ struct MainMenuView: View {
 
 struct MainMenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MainMenuView(configuration: AppConfiguration(levels: []))
+        MainMenuView(configuration: AppConfiguration(levels: [
+            AppConfiguration.Level(title: "", category: "", words: [], timeLimit: 10, matrixSize: .init(width: 3, height: 4))
+        ]))
     }
 }
 
