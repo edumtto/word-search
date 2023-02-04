@@ -33,7 +33,7 @@ struct GameLevelView: View {
     }
     
     private var wordsView: some View {
-            SearchedWordsView(words: viewModel.words)
+        SearchedWordsView(words: viewModel.words.filter({ $0.isFound == false }))
     }
     
     private var matrixView: some View {
