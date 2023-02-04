@@ -1,7 +1,8 @@
 import Foundation
 import Combine
 
-@MainActor class GameLevelViewModel: ObservableObject {
+@MainActor
+final class GameLevelViewModel: ObservableObject {
     enum SelectionAxis {
         case horizontal, vertical
     }

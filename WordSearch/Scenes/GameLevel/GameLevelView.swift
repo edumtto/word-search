@@ -3,7 +3,7 @@ import SwiftUI
 struct GameLevelView: View {
     @EnvironmentObject var pathState: PathState
     
-    @ObservedObject var viewModel: GameLevelViewModel
+    @StateObject var viewModel: GameLevelViewModel
     
     var body: some View {
         VStack {
