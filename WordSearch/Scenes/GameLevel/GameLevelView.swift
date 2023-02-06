@@ -28,20 +28,19 @@ struct GameLevelView: View {
             TimeCounterView(timeTotal: viewModel.gameScore.time.total, timeCounter: viewModel.timeCounter)
         }
         .frame(height: 40)
-        
         .padding(.init(top: 0, leading: 16, bottom: 0, trailing: 16))
     }
     
     private var wordsView: some View {
-        SearchedWordsView(words: viewModel.words.filter({ $0.isFound == false }))
+        SearchedWordListView(words: viewModel.notFoundWords)
     }
     
     private var matrixView: some View {
-        ForEach(0..<viewModel.matrix.size.height, id: \.self) { row in
+        ForEach(0..<viewModel.searchMatrix.size.height, id: \.self) { row in
             HStack {
-                ForEach(0..<viewModel.matrix.size.width, id: \.self) { column in
-                    let entry = viewModel.matrix[row, column]
-                    MatrixItemView()
+                ForEach(0..<viewModel.searchMatrix.size.width, id: \.self) { column in
+                    let entry = viewModel.searchMatrix[row, column]
+                    SearchMatrixEntryView()
                         .environmentObject(entry)
                         .frame(width: 32, height: 32)
                         .onTapGesture {
@@ -66,7 +65,7 @@ struct SearchMatrixView_Previews: PreviewProvider {
                         matrixSize: .init(width: 9, height: 12)
                     ),
                     pathState: PathState()
-                )//.previewDevice(.init(rawValue: "iPhone 14"))
+                )
             )
         }
     }

@@ -14,7 +14,6 @@ extension SearchMatrix {
         var position: Position
         var isPartOfAWord: Bool
         
-        
         init(
             value: Character = Entry.emptyValue,
             position: Position,

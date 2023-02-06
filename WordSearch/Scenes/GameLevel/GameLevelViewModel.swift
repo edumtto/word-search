@@ -1,7 +1,14 @@
 import Foundation
 import Combine
 
-@MainActor
+//protocol GameLevelViewModeling: ObservableObject {
+//    var matrix: SearchMatrix { get }
+//    var words: [SearchWord] { get }
+//    var gameScore: GameScore { get }
+//    var timeCounter: UInt { get }
+//    func selectEntry(row: UInt, col: UInt)
+//}
+
 final class GameLevelViewModel: ObservableObject {
     enum SelectionAxis {
         case horizontal, vertical
@@ -12,37 +19,51 @@ final class GameLevelViewModel: ObservableObject {
     private var timer: Timer?
     private var pathState: PathState
     
-    @Published private(set) var matrix: SearchMatrix
-    @Published private(set) var words: [SearchWord]
-    @Published private(set) var gameScore: GameScore
+    @Published private(set) var searchMatrix: SearchMatrix
+    @Published private(set) var notFoundWords: [SearchedWord] {
+        didSet {
+            print("words to find: \(notFoundWords.count)")
+        }
+    }
     @Published private(set) var timeCounter: UInt
+    private(set) var gameScore: GameScore
     
     let title: String
     
     init(_ level: AppConfiguration.Level, pathState: PathState) {
         title = level.title
         self.pathState = pathState
+        
         let matrixSize: SearchMatrix.Size = .init(
             width: level.matrixSize.width,
             height: level.matrixSize.height
         )
-        matrix = SearchMatrix(size: matrixSize)
-        words = level.words.map { SearchWord($0.uppercased()) }
+        searchMatrix = SearchMatrix(size: matrixSize)
+        
+        notFoundWords = level.words.map { SearchedWord($0) }
+        
         timeCounter = level.timeLimit
+        
         gameScore = GameScore(
             time: .init(total: level.timeLimit, spent: 0),
             words: .init(total: UInt(level.words.count), found: 0)
         )
         
-        words.forEach {
-            matrix.include(word: $0.value)
+        notFoundWords.forEach {
+            searchMatrix.include(word: $0.value)
         }
+        
         print(">>> GameLevelViewModel init")
         runTimer()
     }
     
+    deinit {
+        timer?.invalidate()
+        print(">>> GameLevelViewModel deinit")
+    }
+    
     func selectEntry(row: UInt, col: UInt) {
-        let entry = matrix[row, col]
+        let entry = searchMatrix[row, col]
         
         if entry.isFound {
             return
@@ -69,14 +90,19 @@ final class GameLevelViewModel: ObservableObject {
         
         clearSelection()
     }
-    
+}
+
+// Private methods
+extension GameLevelViewModel {
     private func setGameOver() {
         let totalTime = gameScore.time.total
         let timeSpent = totalTime - timeCounter
+        let totalWords = gameScore.words.total
+        let foundWords = totalWords - UInt(notFoundWords.count)
         pathState.path.append(
             GameScore(
                 time: .init(total: totalTime, spent: timeSpent),
-                words: .init(total: gameScore.words.total, found: UInt(words.filter(\.isFound).count))
+                words: .init(total: totalWords, found: foundWords)
             )
         )
     }
@@ -143,20 +169,22 @@ final class GameLevelViewModel: ObservableObject {
         selectionAxis = nil
     }
     
-    private func checkIfWordFound(on selection: [SearchMatrix.Entry]) -> SearchWord? {
+    private func checkIfWordFound(on selection: [SearchMatrix.Entry]) -> SearchedWord? {
         let selectedWord: String = selection
             .map { String($0.value) }
             .joined(separator: "")
         
         let reversedSelectedWord = String(selectedWord.reversed())
-        let wordsFound = words.filter { word in
-            !word.isFound && word.value == selectedWord || word.value == reversedSelectedWord
+        let wordsFound = notFoundWords.filter { word in
+            word.value == selectedWord || word.value == reversedSelectedWord
         }
         return wordsFound.first
     }
     
-    private func setWordFound(_ word: SearchWord) {
-        word.isFound = true
+    private func setWordFound(_ word: SearchedWord) {
+        if let index = notFoundWords.firstIndex(of: word) {
+            notFoundWords.remove(at: index)
+        }
         
         selection.forEach {
             $0.isFound = true
@@ -165,6 +193,6 @@ final class GameLevelViewModel: ObservableObject {
     }
     
     private func isWordSetFound() -> Bool {
-        words.filter({ $0.isFound == false }).isEmpty
+        notFoundWords.isEmpty
     }
 }

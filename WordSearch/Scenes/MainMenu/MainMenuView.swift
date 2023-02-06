@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MainMenuView: View {
-    @ObservedObject private var pathState = PathState()
+    @StateObject private var pathState = PathState()
     private let configuration: AppConfiguration
     
     var body: some View {
