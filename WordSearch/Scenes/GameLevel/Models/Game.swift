@@ -1,38 +1,26 @@
 import Foundation
 import Combine
 
-//protocol GameLevelViewModeling: ObservableObject {
-//    var matrix: SearchMatrix { get }
-//    var words: [SearchWord] { get }
-//    var gameScore: GameScore { get }
-//    var timeCounter: UInt { get }
-//    func selectEntry(row: UInt, col: UInt)
-//}
-
-final class GameLevelViewModel: ObservableObject {
-    enum SelectionAxis {
-        case horizontal, vertical
-    }
+final class Game: ObservableObject {
+    let levelTitle: String
+    let levelCategory: String
+    
+    // MARK: State
+    @Published private(set) var searchMatrix: SearchMatrix
+    @Published private(set) var notFoundWords: [SearchedWord]
+    @Published private(set) var timeCounter: UInt
+    private(set) var score: GameScore
     
     private var selection: [SearchMatrix.Entry] = []
     private var selectionAxis: SelectionAxis?
     private var timer: Timer?
-    private var pathState: PathState
+    private var navigationState: NavigationState
     
-    @Published private(set) var searchMatrix: SearchMatrix
-    @Published private(set) var notFoundWords: [SearchedWord] {
-        didSet {
-            print("words to find: \(notFoundWords.count)")
-        }
-    }
-    @Published private(set) var timeCounter: UInt
-    private(set) var gameScore: GameScore
-    
-    let title: String
-    
-    init(_ level: AppConfiguration.Level, pathState: PathState) {
-        title = level.title
-        self.pathState = pathState
+    init(_ level: AppConfiguration.Level, navigationState: NavigationState) {
+        levelTitle = level.title
+        levelCategory = level.category
+        
+        self.navigationState = navigationState
         
         let matrixSize: SearchMatrix.Size = .init(
             width: level.matrixSize.width,
@@ -44,7 +32,7 @@ final class GameLevelViewModel: ObservableObject {
         
         timeCounter = level.timeLimit
         
-        gameScore = GameScore(
+        score = GameScore(
             time: .init(total: level.timeLimit, spent: 0),
             words: .init(total: UInt(level.words.count), found: 0)
         )
@@ -53,13 +41,13 @@ final class GameLevelViewModel: ObservableObject {
             searchMatrix.include(word: $0.value)
         }
         
-        print(">>> GameLevelViewModel init")
         runTimer()
+        debugPrint("> Game init")
     }
     
     deinit {
         timer?.invalidate()
-        print(">>> GameLevelViewModel deinit")
+        debugPrint("> Game deinit")
     }
     
     func selectEntry(row: UInt, col: UInt) {
@@ -92,14 +80,18 @@ final class GameLevelViewModel: ObservableObject {
     }
 }
 
-// Private methods
-extension GameLevelViewModel {
-    private func setGameOver() {
-        let totalTime = gameScore.time.total
+// MARK: Private methods
+private extension Game {
+    enum SelectionAxis {
+        case horizontal, vertical
+    }
+    
+    func setGameOver() {
+        let totalTime = score.time.total
         let timeSpent = totalTime - timeCounter
-        let totalWords = gameScore.words.total
+        let totalWords = score.words.total
         let foundWords = totalWords - UInt(notFoundWords.count)
-        pathState.path.append(
+        navigationState.path.append(
             GameScore(
                 time: .init(total: totalTime, spent: timeSpent),
                 words: .init(total: totalWords, found: foundWords)
@@ -107,7 +99,7 @@ extension GameLevelViewModel {
         )
     }
     
-    private func runTimer() {
+    func runTimer() {
         guard timer == nil else { return }
         timer = Timer.scheduledTimer(
             timeInterval: 1,
@@ -118,12 +110,12 @@ extension GameLevelViewModel {
          )
     }
     
-    private func stopTimer() {
+    func stopTimer() {
         timer?.invalidate()
         timer = nil
     }
     
-    @objc private func updateTimer() {
+    @objc func updateTimer() {
         timeCounter -= 1
         if timeCounter <= 0 {
             stopTimer()
@@ -131,7 +123,7 @@ extension GameLevelViewModel {
         }
     }
     
-    private func isAdjacentSelection(entry: SearchMatrix.Entry) -> Bool {
+    func isAdjacentSelection(entry: SearchMatrix.Entry) -> Bool {
         guard let lastSelection = selection.last else {
             return false
         }
@@ -160,7 +152,7 @@ extension GameLevelViewModel {
         return false
     }
     
-    private func clearSelection() {
+    func clearSelection() {
         selection.forEach { entry in
             entry.isSelected = false
         }
@@ -169,7 +161,7 @@ extension GameLevelViewModel {
         selectionAxis = nil
     }
     
-    private func checkIfWordFound(on selection: [SearchMatrix.Entry]) -> SearchedWord? {
+    func checkIfWordFound(on selection: [SearchMatrix.Entry]) -> SearchedWord? {
         let selectedWord: String = selection
             .map { String($0.value) }
             .joined(separator: "")
@@ -181,7 +173,7 @@ extension GameLevelViewModel {
         return wordsFound.first
     }
     
-    private func setWordFound(_ word: SearchedWord) {
+    func setWordFound(_ word: SearchedWord) {
         if let index = notFoundWords.firstIndex(of: word) {
             notFoundWords.remove(at: index)
         }
@@ -192,7 +184,7 @@ extension GameLevelViewModel {
         }
     }
     
-    private func isWordSetFound() -> Bool {
+    func isWordSetFound() -> Bool {
         notFoundWords.isEmpty
     }
 }

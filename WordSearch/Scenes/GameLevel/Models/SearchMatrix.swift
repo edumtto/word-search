@@ -1,23 +1,12 @@
 import Foundation
 
 final class SearchMatrix {
-    struct Size {
-        let width, height: UInt
-    }
-    
-    struct WordPosition {
-        enum Axis {
-            case horizontal, vertical
-        }
-        
-        let origin: Entry.Position
-        let axis: Axis
-    }
-
-    let size: Size
+    // MARK: State
     @Published var grid: [[Entry]]
+    
+    let size: Size
     var wordInsertionRetries: Int = 10
-
+    
     init(size: Size) {
         self.size = size
         grid = [[Entry]]()
@@ -31,7 +20,7 @@ final class SearchMatrix {
             grid.append(entryRow)
         }
     }
-
+    
     init(size: Size, grid: [[Entry]]) {
         self.size = size
         self.grid = grid
@@ -61,13 +50,33 @@ final class SearchMatrix {
             
             if isInsertionPossible(word, position: randomPosition) {
                 insertWord(word, position: randomPosition)
-                 // debugPrint("\"\(word)\" inserted with \(retryCount) retries")
+                // debugPrint("\"\(word)\" inserted with \(retryCount) retries")
                 return true
             }
         }
-                
+        
         return false
     }
+}
+
+// MARK: Internal models
+extension SearchMatrix {
+    struct Size {
+        let width, height: UInt
+    }
+    
+    struct WordPosition {
+        enum Axis {
+            case horizontal, vertical
+        }
+        
+        let origin: Entry.Position
+        let axis: Axis
+    }
+}
+
+// MARK: Private methods
+private extension SearchMatrix {
     
     private var randomCharacter: Character {
         let allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

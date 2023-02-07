@@ -2,8 +2,8 @@ import SwiftUI
 
 struct TimeCounterView: View {
     private let size: CGFloat = 40
-    let timeTotal: UInt
-    var timeCounter: UInt
+    private let timeTotal: UInt
+    private var timeCounter: UInt
     
     private var progress: CGFloat {
         CGFloat(timeCounter)/CGFloat(timeTotal)
@@ -23,16 +23,21 @@ struct TimeCounterView: View {
             .frame(width: size, height: size)
             .overlay(
                 Circle()
-                    .trim(from:0, to: progress)
+                    .trim(from: 0, to: progress)
                     .stroke(
                         style: StrokeStyle(
                             lineWidth: 3,
                             lineCap: .round,
-                            lineJoin:.round
+                            lineJoin: .round
                         )
                     )
                     .foregroundColor(.gray)
             )
+    }
+    
+    init(timeTotal: UInt, timeCounter: UInt) {
+        self.timeTotal = timeTotal
+        self.timeCounter = timeCounter
     }
 }
 
