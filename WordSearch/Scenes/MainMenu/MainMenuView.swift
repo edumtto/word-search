@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MainMenuView: View {
     @EnvironmentObject var navigationState: NavigationState
-    private let configuration: AppConfiguration
+    private let repository = Repository()
     
     var body: some View {
         ZStack {
@@ -15,7 +15,7 @@ struct MainMenuView: View {
                         .weight(.black)
                     )
                     .padding(24)
-                NavigationLink("Start game", value: configuration.levels[1])
+                NavigationLink("Start game", value: repository.level)
                     .buttonStyle(.borderedProminent)
                     .tint(.yellow)
                     .foregroundColor(.black)
@@ -26,16 +26,13 @@ struct MainMenuView: View {
         }
     }
     
-    init(configuration: AppConfiguration) {
-        self.configuration = configuration
+    init() {
         debugPrint("> MainMenuView init")
     }
 }
 
 struct MainMenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MainMenuView(configuration: AppConfiguration(levels: [
-            AppConfiguration.Level(title: "", category: "", words: [], timeLimit: 10, matrixSize: .init(width: 3, height: 4))
-        ]))
+        MainMenuView()
     }
 }
