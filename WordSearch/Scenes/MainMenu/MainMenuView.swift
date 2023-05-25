@@ -11,11 +11,11 @@ struct MainMenuBackground: View {
             .frame(width: proxy.size.width, height: proxy.size.height , alignment: .center)
             .scaleEffect(animating ? 1 : 10, anchor: .center)
             .blur(radius: animating ? 0 : 16)
-            .opacity(0.5)
+            .opacity(0.4)
             .animation(.easeIn(duration: 0.6), value: animating)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    animating.toggle()
+                    animating = true
                 }
             }
     }
@@ -50,8 +50,8 @@ struct MainMenuView: View {
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                displayContent.toggle()
-                zoomButton.toggle()
+                displayContent = true
+                zoomButton = true
             }
         }
     }
@@ -68,7 +68,7 @@ struct MainMenuView: View {
                 .foregroundColor(.black)
         }
         .padding(.init(top: 8, leading: 16, bottom: 8, trailing: 16))
-        .border(.secondary)
+        .border(.black)
         .background(.white)
     }
     

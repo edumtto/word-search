@@ -4,7 +4,7 @@
             "title": "Level 1",
             "category": "Feelings",
             "words": ["happy", "angry", "sad", "fear", "joy", "surprise"],
-            "time_limit": 120,
+            "time_limit": 10,
             "matrix_size": {
                 "width": 9,
                 "height": 12
