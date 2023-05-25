@@ -125,7 +125,6 @@
 				345A5EF9298B67FF00BC0EE0 /* AppConfiguration.swift */,
 				34ADF7C12991CEDC00993B27 /* NavigationState.swift */,
 				34ADF7C32991D22400993B27 /* Repository.swift */,
-				34F666142A1EFD1D004018C1 /* CustomColor.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -217,6 +216,7 @@
 		34D9D5BF2985E9CC00A5A84E /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				34F666142A1EFD1D004018C1 /* CustomColor.swift */,
 				34D9D5C02985E9E100A5A84E /* MainMenu */,
 				34D9D5BE2985E83C00A5A84E /* GameLevel */,
 				34B4E08529849B1D001F793D /* FinalScore */,

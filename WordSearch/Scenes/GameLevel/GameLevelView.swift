@@ -70,7 +70,7 @@ struct SearchMatrixView_Previews: PreviewProvider {
                     AppConfiguration.Level(
                         title: "Level 3",
                         category: "Fruits",
-                        words: ["apple", "grape", "orange"],
+                        words: ["apple", "grape", "orange", "banana", "guava", "melon"],
                         timeLimit: 20,
                         matrixSize: .init(width: 9, height: 12)
                     ),

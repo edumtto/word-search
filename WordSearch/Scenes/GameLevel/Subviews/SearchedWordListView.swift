@@ -10,6 +10,7 @@ struct SearchedWordListView: View {
                     SearchedWordView(word: word)
                 }
             }
+            .preferredColorScheme(.dark)
             .padding()
         }
     }
@@ -18,5 +19,7 @@ struct SearchedWordListView: View {
 struct SearchWordsView_Previews: PreviewProvider {
     static var previews: some View {
         SearchedWordListView(words: [SearchedWord("LOVE"), SearchedWord("LIFE"), SearchedWord("HEART"), SearchedWord("FRIENDSHIP"), SearchedWord("PEACE"), SearchedWord("HAPPY"), SearchedWord("ROMANCE"), SearchedWord("THANKS"), SearchedWord("SMILE")])
+            .padding(.init(top: 16, leading: 0, bottom: 16, trailing: 0))
+            .background(.gray)
     }
 }

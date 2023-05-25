@@ -5,6 +5,7 @@ struct SearchedWordView: View {
     
     var body: some View {
         Text(word.value)
+            .foregroundColor(.black)
             .padding(.init(top: 4, leading: 8, bottom: 4, trailing: 8))
             .background(
                 Capsule()
