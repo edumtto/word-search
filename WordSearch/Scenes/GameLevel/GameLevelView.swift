@@ -5,11 +5,18 @@ struct GameLevelView: View {
     @EnvironmentObject var navigationState: NavigationState
     
     var body: some View {
-        VStack {
-            headerView
-            wordsView
-            Divider()
-            matrixView
+        ZStack {
+            LinearGradient(
+                gradient: Gradient(colors: [CustomColor.primary, CustomColor.secondary]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+                .ignoresSafeArea()
+            VStack {
+                headerView
+                wordsView
+                matrixView
+            }
         }
         .navigationTitle(game.levelTitle)
         .navigationBarTitleDisplayMode(.inline)
@@ -20,6 +27,8 @@ struct GameLevelView: View {
         HStack {
             Text(game.levelCategory)
                 .font(.largeTitle)
+                .bold()
+                .foregroundColor(.white)
             Spacer()
             TimeCounterView(timeTotal: game.score.time.total, timeCounter: game.timeCounter)
         }
@@ -32,19 +41,24 @@ struct GameLevelView: View {
     }
     
     private var matrixView: some View {
-        ForEach(0..<game.searchMatrix.size.height, id: \.self) { row in
-            HStack {
-                ForEach(0..<game.searchMatrix.size.width, id: \.self) { column in
-                    let entry = game.searchMatrix[row, column]
-                    SearchMatrixEntryView()
-                        .environmentObject(entry)
-                        .frame(width: 32, height: 32)
-                        .onTapGesture {
-                            game.selectEntry(row: row, col: column)
-                        }
+        VStack {
+            ForEach(0..<game.searchMatrix.size.height, id: \.self) { row in
+                HStack {
+                    ForEach(0..<game.searchMatrix.size.width, id: \.self) { column in
+                        let entry = game.searchMatrix[row, column]
+                        SearchMatrixEntryView()
+                            .environmentObject(entry)
+                            .frame(width: 32, height: 32)
+                            .onTapGesture {
+                                game.selectEntry(row: row, col: column)
+                            }
+                    }
                 }
             }
         }
+        .padding(4)
+        .background(.white)
+        .cornerRadius(8)
     }
 }
 

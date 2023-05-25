@@ -12,6 +12,7 @@ struct TimeCounterView: View {
     var body: some View {
         HStack {
             Text("\(timeCounter)")
+                .foregroundColor(.white)
                 .overlay(progressCircle)
         }
         .frame(width: size, height: size)
@@ -31,7 +32,7 @@ struct TimeCounterView: View {
                             lineJoin: .round
                         )
                     )
-                    .foregroundColor(.gray)
+                    .foregroundColor(.white)
             )
     }
     
@@ -44,5 +45,7 @@ struct TimeCounterView: View {
 struct TimeCounterView_Previews: PreviewProvider {
     static var previews: some View {
         TimeCounterView(timeTotal: 600, timeCounter: 400)
+            .padding()
+            .background(.gray)
     }
 }

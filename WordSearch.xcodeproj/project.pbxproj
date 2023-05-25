@@ -30,6 +30,7 @@
 		34B4E08729849B35001F793D /* FinalScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B4E08629849B35001F793D /* FinalScoreView.swift */; };
 		34D9D5BD2985DBCA00A5A84E /* TimeCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D9D5BC2985DBCA00A5A84E /* TimeCounterView.swift */; };
 		34E27AB7298363960012188B /* SearchMatrixEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E27AB6298363960012188B /* SearchMatrixEntry.swift */; };
+		34F666152A1EFD1D004018C1 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F666142A1EFD1D004018C1 /* CustomColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		34B4E08629849B35001F793D /* FinalScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalScoreView.swift; sourceTree = "<group>"; };
 		34D9D5BC2985DBCA00A5A84E /* TimeCounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCounterView.swift; sourceTree = "<group>"; };
 		34E27AB6298363960012188B /* SearchMatrixEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMatrixEntry.swift; sourceTree = "<group>"; };
+		34F666142A1EFD1D004018C1 /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				345A5EF9298B67FF00BC0EE0 /* AppConfiguration.swift */,
 				34ADF7C12991CEDC00993B27 /* NavigationState.swift */,
 				34ADF7C32991D22400993B27 /* Repository.swift */,
+				34F666142A1EFD1D004018C1 /* CustomColor.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				345A5EF8298B67DF00BC0EE0 /* JSONLoader.swift in Sources */,
 				3464E7A4296E1DB800F3BBED /* MainMenuView.swift in Sources */,
 				342C8BF3297776AB00802A01 /* SearchedWordListView.swift in Sources */,
+				34F666152A1EFD1D004018C1 /* CustomColor.swift in Sources */,
 				34B4E08729849B35001F793D /* FinalScoreView.swift in Sources */,
 				34ADF7C42991D22400993B27 /* Repository.swift in Sources */,
 				34B4E084298499EB001F793D /* GameScore.swift in Sources */,

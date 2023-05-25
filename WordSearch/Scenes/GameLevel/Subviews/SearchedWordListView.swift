@@ -9,7 +9,8 @@ struct SearchedWordListView: View {
                 ForEach(words) { word in
                     SearchedWordView(word: word)
                 }
-            }.padding(16)
+            }
+            .padding()
         }
     }
 }

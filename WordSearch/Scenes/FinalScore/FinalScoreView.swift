@@ -12,7 +12,7 @@ struct FinalScoreView: View {
             VStack {
                 Image(systemName: isGameWon ? "trophy" : "timer.circle")
                     .symbolVariant(.circle)
-                    .foregroundColor(isGameWon ? .yellow : .gray)
+                    .foregroundColor(isGameWon ? .accentColor : .gray)
                     .scaleEffect(5)
                     .padding(.bottom, 54)
                 

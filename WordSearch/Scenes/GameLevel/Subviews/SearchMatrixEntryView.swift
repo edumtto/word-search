@@ -9,7 +9,7 @@ struct SearchMatrixEntryView: View {
             .frame(width: 32, height: 32)
             .background(
                 Capsule()
-                    .foregroundColor(entry.isSelected ? Color.yellow : Color.clear)
+                    .foregroundColor(entry.isSelected ? Color.accentColor : Color.clear)
             )
             .foregroundColor(entry.isFound ? .red : .black)
             .animation(.linear(duration: 0.2), value: entry.isSelected)
