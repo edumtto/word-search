@@ -21,6 +21,9 @@ struct FinalScoreView: View {
                 .navigationTitle("Score")
                 .navigationBarBackButtonHidden(true)
             }
+            if isGameWon {
+                ConfettiAnimationView()
+            }
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {

@@ -30,6 +30,7 @@
 		34B4E08729849B35001F793D /* FinalScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B4E08629849B35001F793D /* FinalScoreView.swift */; };
 		34D9D5BD2985DBCA00A5A84E /* TimeCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D9D5BC2985DBCA00A5A84E /* TimeCounterView.swift */; };
 		34E27AB7298363960012188B /* SearchMatrixEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E27AB6298363960012188B /* SearchMatrixEntry.swift */; };
+		34EBD1BB2A202B9F00BB00C2 /* ConfetiAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EBD1BA2A202B9F00BB00C2 /* ConfetiAnimationView.swift */; };
 		34F666152A1EFD1D004018C1 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F666142A1EFD1D004018C1 /* CustomColor.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		34B4E08629849B35001F793D /* FinalScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalScoreView.swift; sourceTree = "<group>"; };
 		34D9D5BC2985DBCA00A5A84E /* TimeCounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCounterView.swift; sourceTree = "<group>"; };
 		34E27AB6298363960012188B /* SearchMatrixEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMatrixEntry.swift; sourceTree = "<group>"; };
+		34EBD1BA2A202B9F00BB00C2 /* ConfetiAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfetiAnimationView.swift; sourceTree = "<group>"; };
 		34F666142A1EFD1D004018C1 /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -199,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				34B4E08629849B35001F793D /* FinalScoreView.swift */,
+				34EBD1BA2A202B9F00BB00C2 /* ConfetiAnimationView.swift */,
 			);
 			path = FinalScore;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				3464E7A2296E1DB800F3BBED /* WordSearchApp.swift in Sources */,
 				34B4E082298468F8001F793D /* SearchedWordView.swift in Sources */,
 				34B4E08029846066001F793D /* SearchedWord.swift in Sources */,
+				34EBD1BB2A202B9F00BB00C2 /* ConfetiAnimationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
