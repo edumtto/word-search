@@ -117,6 +117,7 @@ private extension Game {
     
     @objc func updateTimer() {
         timeCounter -= 1
+        print("---> \(timeCounter)")
         if timeCounter <= 0 {
             stopTimer()
             setGameOver()

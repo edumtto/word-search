@@ -33,7 +33,7 @@ struct MainMenuView: View {
     
     var body: some View {
         ZStack {
-            CustomColor.tertiary
+            CustomColor.secondary
                 .ignoresSafeArea()
             GeometryReader { proxy in
                 MainMenuBackground(proxy: proxy)

@@ -9,6 +9,8 @@ struct Repository {
     }()
     
     var level: AppConfiguration.Level {
-        configuration.levels[0]
+        let availableLevels = configuration.levels.count
+        let levelIndex = Int.random(in: 0..<availableLevels)
+        return configuration.levels[levelIndex]
     }
 }
