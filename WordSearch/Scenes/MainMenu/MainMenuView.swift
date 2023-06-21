@@ -68,8 +68,9 @@ struct MainMenuView: View {
                 .foregroundColor(.black)
         }
         .padding(.init(top: 8, leading: 16, bottom: 8, trailing: 16))
-        .border(.black)
         .background(.white)
+        .cornerRadius(4)
+        .shadow(color: CustomColor.tertiary, radius: 4)
     }
     
     var startGameButton: some View {
