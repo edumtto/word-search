@@ -1,6 +1,6 @@
 # WordSearch
 
-This is an experimental project focused in exploring SwiftUI, animations, and the NavigationPath feature for routing scenes
+This experimental project is centered around my exploration of SwiftUI, animations, and the NavigationPath feature for seamless scene navigation.
 
 Developed using:
 - SwiftUI for layout and animations
